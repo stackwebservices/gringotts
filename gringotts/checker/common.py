@@ -27,6 +27,7 @@ RESOURCE = ['floatingip', 'router', 'listener', 'instance',
 
 register_class = functools.partial(register_class, ks_client)
 
+
 class Resource(object):
 
     """TODO(chengkun): Maybe put it in public area?  """
@@ -53,7 +54,7 @@ class CheckBase(object):
 
     """Base check class. """
 
-    @abc.abstractproperty
+    @property
     def product_items(self):
         pass
 
