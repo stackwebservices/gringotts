@@ -15,7 +15,7 @@
 import six
 import logging
 import requests
-from urllib import urlencode
+from urllib.parse import urlencode
 
 from oslo_config import cfg
 from stevedore import driver
