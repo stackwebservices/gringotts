@@ -26,9 +26,7 @@ def main():
     # Build and start the WSGI app
     host = CONF.api.host
     port = CONF.api.port
-    wsgi = simple_server.make_server(host,
-                                     port,
-                                     app.load_app())
+    wsgi = simple_server.make_server(host, port, app.load_app())
 
     LOG.info("Serving on http://%s:%s" % (host, port))
     LOG.info("Configuration:")
