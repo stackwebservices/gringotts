@@ -435,8 +435,7 @@ class Connection(api.Connection):
             raise exception.ProductIdNotFound(product_id)
         return self._row_to_db_product_model(ref)
 
-    @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+    @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True)
     def delete_product(self, context, product_id):
         product = self.get_product(context, product_id)
         product.deleted = True
@@ -451,7 +450,7 @@ class Connection(api.Connection):
         return self._row_to_db_product_model(ref)
 
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def update_product(self, context, product):
         session = get_session()
         with session.begin():
@@ -462,7 +461,7 @@ class Connection(api.Connection):
         return self._row_to_db_product_model(ref)
 
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def reset_product(self, context, product, excluded_projects=[]):
         session = get_session()
         with session.begin():
@@ -543,7 +542,7 @@ class Connection(api.Connection):
 
     @require_admin_context
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def create_order(self, context, **order):
         session = get_session()
         with session.begin():
@@ -679,7 +678,7 @@ class Connection(api.Connection):
 
     @require_admin_context
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def update_order(self, context, **kwargs):
         """Change unit price of this order
         """
@@ -731,7 +730,7 @@ class Connection(api.Connection):
 
     @require_admin_context
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def close_order(self, context, order_id):
         session = get_session()
         with session.begin():
@@ -916,7 +915,7 @@ class Connection(api.Connection):
 
     @require_admin_context
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def create_subscription(self, context, **subscription):
         session = get_session()
         with session.begin():
@@ -964,7 +963,7 @@ class Connection(api.Connection):
         return self._row_to_db_subscription_model(subscription)
 
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def update_subscription(self, context, **kwargs):
         session = get_session()
         with session.begin():
@@ -986,7 +985,7 @@ class Connection(api.Connection):
                                        exception.SubscriptionUpdateFailed())
 
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def update_flavor_subscription(self, context, **kwargs):
         session = get_session()
         with session.begin():
@@ -1269,7 +1268,7 @@ class Connection(api.Connection):
         return self._row_to_db_account_model(ref)
 
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def delete_account(self, context, user_id):
         """delete the account and projects"""
 
@@ -1344,7 +1343,7 @@ class Connection(api.Connection):
         return query.one().count or 0
 
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def change_account_level(self, context, user_id, level, project_id=None):
         session = get_session()
         with session.begin():
@@ -1364,7 +1363,7 @@ class Connection(api.Connection):
         return self._row_to_db_account_model(account)
 
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def update_account(self, context, user_id, project_id=None,
                        operator=None, **data):
         """Do the charge charge account trick
@@ -1413,7 +1412,7 @@ class Connection(api.Connection):
 
     @require_admin_context
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def deduct_account(self, context, user_id, deduct=True, **data):
         """Deduct account by user_id
         """
@@ -1479,7 +1478,7 @@ class Connection(api.Connection):
                 order.charged = True
 
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def reset_charged_orders(self, context, order_ids):
         session = get_session()
         with session.begin():
@@ -1567,7 +1566,7 @@ class Connection(api.Connection):
 
     @require_admin_context
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def freeze_balance(self, context, project_id, total_price):
         session = get_session()
         with session.begin():
@@ -1595,7 +1594,7 @@ class Connection(api.Connection):
 
     @require_admin_context
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def unfreeze_balance(self, context, project_id, total_price):
         session = get_session()
         with session.begin():
@@ -1682,7 +1681,7 @@ class Connection(api.Connection):
         return (self._row_to_db_project_model(p) for p in projects)
 
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def change_billing_owner(self, context, project_id, user_id):
         session = get_session()
         with session.begin():
@@ -1752,7 +1751,7 @@ class Connection(api.Connection):
 
     @require_admin_context
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def update_bill(self, context, order_id, external_balance=None):
         """Update the latest bill, there are three type of results:
         0, Update bill successfully, including account is owed and order is
@@ -1908,7 +1907,7 @@ class Connection(api.Connection):
 
     @require_admin_context
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def create_bill(self, context, order_id, action_time=None,
                     remarks=None, end_time=None,
                     external_balance=None):
@@ -2121,7 +2120,7 @@ class Connection(api.Connection):
 
     @require_admin_context
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def close_bill(self, context, order_id, action_time,
                    external_balance=None):
         session = get_session()
@@ -2231,7 +2230,7 @@ class Connection(api.Connection):
 
     @require_admin_context
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def fix_order(self, context, order_id):
         session = get_session()
         with session.begin():
@@ -2314,7 +2313,7 @@ class Connection(api.Connection):
         return result.count
 
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def delete_precharge(self, context, code):
         session = get_session()
         with session.begin():
@@ -2339,7 +2338,7 @@ class Connection(api.Connection):
         return self._row_to_db_precharge_model(precharge)
 
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def dispatch_precharge(self, context, code, remarks=None):
         session = get_session()
         with session.begin():
@@ -2363,7 +2362,7 @@ class Connection(api.Connection):
         return self._row_to_db_precharge_model(precharge)
 
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def use_precharge(self, context, code, user_id=None, project_id=None):
         session = get_session()
         with session.begin():
@@ -2417,7 +2416,7 @@ class Connection(api.Connection):
 
     @require_context
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def fix_resource(self, context, resource_id):
         session = get_session()
         with session.begin():
@@ -2453,7 +2452,7 @@ class Connection(api.Connection):
 
     @require_context
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def fix_stopped_order(self, context, order_id):
         session = get_session()
         with session.begin():
@@ -2512,7 +2511,7 @@ class Connection(api.Connection):
             account.consumption -= more_fee
 
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def transfer_money(self, cxt, data):
         session = get_session()
         with session.begin():
@@ -2564,7 +2563,7 @@ class Connection(api.Connection):
             session.add(charge_from)
 
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def set_accounts_salesperson(self, context, user_id_list, sales_id):
         session = get_session()
         with session.begin():
@@ -2617,7 +2616,7 @@ class Connection(api.Connection):
             return ()
 
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def activate_auto_renew(self, context, order_id, renew):
         """Activate or update auto renew
 
@@ -2671,7 +2670,7 @@ class Connection(api.Connection):
         return self._row_to_db_order_model(order)
 
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def switch_auto_renew(self, context, order_id, action):
         session = get_session()
         with session.begin():
@@ -2703,7 +2702,7 @@ class Connection(api.Connection):
         return self._row_to_db_order_model(order)
 
     @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               retry_on_request=True)
+                               )
     def renew_order(self, context, order_id, renew):
         session = get_session()
         with session.begin():
