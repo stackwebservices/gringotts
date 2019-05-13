@@ -370,8 +370,7 @@ class Connection(api.Connection):
 
         return p_dict
 
-    def _compare_and_swap(self, query, ref, filters,
-                          params, failed_exception):
+    def _compare_and_swap(self, query, ref, filters, params, failed_exception):
         update_filters = {}
         for f in filters:
             update_filters[f] = getattr(ref, f)
@@ -460,8 +459,7 @@ class Connection(api.Connection):
             ref = query.one()
         return self._row_to_db_product_model(ref)
 
-    @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               )
+    @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True)
     def reset_product(self, context, product, excluded_projects=[]):
         session = get_session()
         with session.begin():
@@ -677,8 +675,7 @@ class Connection(api.Connection):
         return self._row_to_db_order_model(ref)
 
     @require_admin_context
-    @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               )
+    @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True)
     def update_order(self, context, **kwargs):
         """Change unit price of this order
         """
@@ -729,8 +726,7 @@ class Connection(api.Connection):
                                    exception.OrderUpdateFailed())
 
     @require_admin_context
-    @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               )
+    @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True)
     def close_order(self, context, order_id):
         session = get_session()
         with session.begin():
@@ -914,8 +910,7 @@ class Connection(api.Connection):
         return (self._row_to_db_order_model(o) for o in result)
 
     @require_admin_context
-    @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               )
+    @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True)
     def create_subscription(self, context, **subscription):
         session = get_session()
         with session.begin():
@@ -962,8 +957,7 @@ class Connection(api.Connection):
 
         return self._row_to_db_subscription_model(subscription)
 
-    @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               )
+    @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True)
     def update_subscription(self, context, **kwargs):
         session = get_session()
         with session.begin():
@@ -984,8 +978,7 @@ class Connection(api.Connection):
                                        sub, filters, params,
                                        exception.SubscriptionUpdateFailed())
 
-    @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               )
+    @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True)
     def update_flavor_subscription(self, context, **kwargs):
         session = get_session()
         with session.begin():
@@ -2669,8 +2662,7 @@ class Connection(api.Connection):
 
         return self._row_to_db_order_model(order)
 
-    @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               )
+    @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True)
     def switch_auto_renew(self, context, order_id, action):
         session = get_session()
         with session.begin():
@@ -2701,8 +2693,7 @@ class Connection(api.Connection):
             order.updated_at = datetime.datetime.utcnow()
         return self._row_to_db_order_model(order)
 
-    @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True,
-                               )
+    @oslo_db_api.wrap_db_retry(max_retries=5, retry_on_deadlock=True)
     def renew_order(self, context, order_id, renew):
         session = get_session()
         with session.begin():

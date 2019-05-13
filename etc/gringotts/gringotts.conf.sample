@@ -61,7 +61,7 @@ project_domain_name=Default
 os_auth_url=http://localhost:35357/v3
 
 [database]
-connection=mysql://root:admin@localhost/gringotts?charset=utf8
+connection=mysql+mysqlconnector://root:admin@localhost/gringotts?charset=utf8
 
 [keystone_authtoken]
 auth_protocol=http

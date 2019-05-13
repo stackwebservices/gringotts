@@ -34,10 +34,7 @@ def upgrade():
 
         sa.Column('created_at', sa.DateTime),
         sa.Column('updated_at', sa.DateTime),
-        sa.Column('deleted_at', sa.DateTime),
-
-        mysql_engine='InnoDB',
-        mysql_charset='utf8',
+        sa.Column('deleted_at', sa.DateTime)
     )
 
     op.create_table(
@@ -71,10 +68,7 @@ def upgrade():
         sa.Column('owed', sa.Boolean),
 
         sa.Column('created_at', sa.DateTime),
-        sa.Column('updated_at', sa.DateTime),
-
-        mysql_engine='InnoDB',
-        mysql_charset='utf8',
+        sa.Column('updated_at', sa.DateTime)
     )
     op.create_index('ix_order_user_id_project_id', 'order', ['user_id', 'project_id'])
     op.create_unique_constraint('uq_order_resource_id', 'order', ['resource_id'])
@@ -98,10 +92,7 @@ def upgrade():
         sa.Column('domain_id', sa.String(255)),
 
         sa.Column('created_at', sa.DateTime),
-        sa.Column('updated_at', sa.DateTime),
-
-        mysql_engine='InnoDB',
-        mysql_charset='utf8',
+        sa.Column('updated_at', sa.DateTime)
     )
 
     op.create_table(
@@ -131,10 +122,7 @@ def upgrade():
         sa.Column('domain_id', sa.String(255)),
 
         sa.Column('created_at', sa.DateTime),
-        sa.Column('updated_at', sa.DateTime),
-
-        mysql_engine='InnoDB',
-        mysql_charset='utf8',
+        sa.Column('updated_at', sa.DateTime)
     )
 
     op.create_index('ix_bill_start_end_time',
@@ -156,10 +144,7 @@ def upgrade():
 
         sa.Column('created_at', sa.DateTime),
         sa.Column('updated_at', sa.DateTime),
-        sa.Column('deleted_at', sa.DateTime),
-
-        mysql_engine='InnoDB',
-        mysql_charset='utf8',
+        sa.Column('deleted_at', sa.DateTime)
     )
 
     op.create_table(
@@ -173,10 +158,7 @@ def upgrade():
         sa.Column('domain_id', sa.String(255)),
 
         sa.Column('created_at', sa.DateTime),
-        sa.Column('updated_at', sa.DateTime),
-
-        mysql_engine='InnoDB',
-        mysql_charset='utf8',
+        sa.Column('updated_at', sa.DateTime)
     )
 
     op.create_table(
@@ -190,10 +172,7 @@ def upgrade():
         sa.Column('domain_id', sa.String(255)),
 
         sa.Column('created_at', sa.DateTime),
-        sa.Column('updated_at', sa.DateTime),
-
-        mysql_engine='InnoDB',
-        mysql_charset='utf8',
+        sa.Column('updated_at', sa.DateTime)
     )
 
     op.create_unique_constraint('uq_user_project_id', 'user_project', ['user_id', 'project_id'])
@@ -214,10 +193,7 @@ def upgrade():
         sa.Column('remarks', sa.String(255)),
 
         sa.Column('created_at', sa.DateTime),
-        sa.Column('updated_at', sa.DateTime),
-
-        mysql_engine='InnoDB',
-        mysql_charset='utf8',
+        sa.Column('updated_at', sa.DateTime)
     )
 
     op.create_table(
@@ -240,10 +216,7 @@ def upgrade():
         sa.Column('operator_id', sa.String(255)),
         sa.Column('domain_id', sa.String(255)),
 
-        sa.Column('remarks', sa.String(255)),
-
-        mysql_engine='InnoDB',
-        mysql_charset='utf8',
+        sa.Column('remarks', sa.String(255))
     )
 
     op.create_table(
@@ -257,12 +230,8 @@ def upgrade():
         sa.Column('remark', sa.String(255)),
 
         sa.Column('order_id', sa.String(255)),
-        sa.Column('created_at', sa.DateTime),
-
-        mysql_engine='InnoDB',
-        mysql_charset='utf8',
+        sa.Column('created_at', sa.DateTime)
     )
-
 
 
 def downgrade():
