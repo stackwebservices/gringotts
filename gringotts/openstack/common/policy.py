@@ -59,7 +59,7 @@ as it allows particular rules to be explicitly disabled.
 import abc
 import re
 import urllib
-import urllib2
+import urllib3
 
 from oslo_config import cfg
 import six
@@ -506,7 +506,7 @@ def _parse_list_rule(rule):
             continue
 
         # Handle bare strings
-        if isinstance(inner_rule, basestring):
+        if isinstance(inner_rule, str):
             inner_rule = [inner_rule]
 
         # Parse the inner rules into Check objects
@@ -765,7 +765,7 @@ def parse_rule(rule):
     """Parses a policy rule into a tree of Check objects."""
 
     # If the rule is a string, it's in the policy language
-    if isinstance(rule, basestring):
+    if isinstance(rule, str):
         return _parse_text_rule(rule)
     return _parse_list_rule(rule)
 
@@ -829,7 +829,7 @@ class HttpCheck(Check):
         data = {'target': jsonutils.dumps(target),
                 'credentials': jsonutils.dumps(creds)}
         post_data = urllib.urlencode(data)
-        f = urllib2.urlopen(url, post_data)
+        f = urllib3.urlopen(url, post_data)
         return f.read() == "True"
 
 

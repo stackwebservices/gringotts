@@ -35,6 +35,7 @@ def troveclient(region_name=None):
     tc.client.management_url = endpoint
     return tc
 
+
 @wrap_exception(exc_type='get', with_raise=False)
 def quota_get(project_id, region_name=None):
     client = troveclient(region_name)

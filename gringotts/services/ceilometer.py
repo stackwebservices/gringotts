@@ -2,7 +2,7 @@ import functools
 import logging as log
 
 from ceilometerclient import client as cmclient
-from ceilometerclient.openstack.common.apiclient.exceptions import NotFound
+from ceilometerclient.apiclient.exceptions import NotFound
 
 from gringotts import utils
 from gringotts import constants as const

@@ -3,7 +3,7 @@ SQLAlchemy models for Gringotts data
 """
 
 import json
-import urlparse
+from urllib.parse import urlparse
 from oslo_config import cfg
 
 from sqlalchemy import Column, Integer, String
@@ -23,7 +23,7 @@ cfg.CONF.register_opts(sql_opts)
 
 
 def table_args():
-    engine_name = urlparse.urlparse(cfg.CONF.database.connection).scheme
+    engine_name = urlparse(cfg.CONF.database.connection).scheme
     if engine_name == 'mysql':
         return {'mysql_engine': cfg.CONF.mysql_engine,
                 'mysql_charset': "utf8"}
@@ -31,7 +31,7 @@ def table_args():
 
 
 class JSONEncodedDict(TypeDecorator):
-    "Represents an immutable structure as a json-encoded string."
+    """Represents an immutable structure as a json-encoded string."""
 
     impl = String
 

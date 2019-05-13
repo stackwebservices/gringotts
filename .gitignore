@@ -2,6 +2,8 @@
 .tox
 .testrepository/
 .venv
+.pyenv
+.idea
 
 # Compiled files
 *.py[co]

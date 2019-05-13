@@ -52,7 +52,7 @@ def prepare_service(argv=None):
     cfg.CONF(argv[1:], project='gringotts')
     log.setup('gringotts')
 
-    #NOTE(suo): Import services/submodules to register methods
+    # NOTE(suo): Import services/submodules to register methods
     # If use `from gringotts.services import *` will cause SynaxWarning,
     # so we import every submodule implicitly.
     from gringotts import services

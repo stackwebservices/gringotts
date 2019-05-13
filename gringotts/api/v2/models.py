@@ -313,8 +313,8 @@ class Bill(APIBase):
     @classmethod
     def sample1(cls):
         return cls(resource_id='resource-id-xxx',
-                   start_time=datetime.datetime(2013, 12, 29, 03, 00, 00),
-                   end_time=datetime.datetime(2013, 12, 29, 04, 00, 00),
+                   start_time=datetime.datetime(2013, 12, 29, 3, 00, 00),
+                   end_time=datetime.datetime(2013, 12, 29, 4, 00, 00),
                    total_price=12.34,
                    unit_price=0.48,
                    remarks='Instance has been created')
@@ -322,8 +322,8 @@ class Bill(APIBase):
     @classmethod
     def sample2(cls):
         return cls(resource_id='resource-id-yyy',
-                   start_time=datetime.datetime(2013, 12, 29, 04, 00, 00),
-                   end_time=datetime.datetime(2013, 12, 29, 05, 00, 00),
+                   start_time=datetime.datetime(2013, 12, 29, 4, 00, 00),
+                   end_time=datetime.datetime(2013, 12, 29, 5, 00, 00),
                    total_price=12.34,
                    unit_price=0.48,
                    remarks='Instance has been stopped')

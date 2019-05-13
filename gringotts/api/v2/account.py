@@ -21,8 +21,7 @@ from gringotts.openstack.common import log
 from gringotts.openstack.common.gettextutils import _
 
 
-cfg.CONF.import_opt('notifier_level', 'gringotts.checker.service',
-                    group='checker')
+cfg.CONF.import_opt('notifier_level', 'gringotts.checker.service', group='checker')
 LOG = log.getLogger(__name__)
 
 

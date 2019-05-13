@@ -1,19 +1,19 @@
 import pecan
-import wsme
+# import wsme
 
 from pecan import rest
 from pecan import request
 from wsmeext.pecan import wsexpose
 from wsme import types as wtypes
 
-from oslo_config import cfg
+# from oslo_config import cfg
 
-from gringotts import constants as const
+# from gringotts import constants as const
 from gringotts.api import app
 from gringotts.api.v2 import models
 from gringotts.db import models as db_models
 from gringotts.openstack.common import log
-from gringotts import utils as gringutils
+# from gringotts import utils as gringutils
 from gringotts import exception
 
 
@@ -30,9 +30,7 @@ class BillingOwnerController(rest.RestController):
     def put(self, user_id):
         """Change billing_owner of this project."""
         self.conn = pecan.request.db_conn
-        self.conn.change_billing_owner(request.context,
-                                              project_id=self.project_id,
-                                              user_id=user_id)
+        self.conn.change_billing_owner(request.context, project_id=self.project_id, user_id=user_id)
 
 
 class ProjectController(rest.RestController):
@@ -85,5 +83,4 @@ class ProjectsController(rest.RestController):
             return conn.create_project(request.context, project)
         except Exception:
             LOG.exception('Fail to create project: %s' % data.as_dict())
-            raise exception.ProjectCreateFailed(project_id=data.project_id,
-                                                user_id=data.user_id)
+            raise exception.ProjectCreateFailed(project_id=data.project_id, user_id=data.user_id)

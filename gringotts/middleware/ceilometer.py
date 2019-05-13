@@ -11,12 +11,9 @@ class CeilometerBillingProtocol(base.BillingProtocol):
 
     def __init__(self, app, conf):
         super(CeilometerBillingProtocol, self).__init__(app, conf)
-        self.resource_regex = re.compile(
-            r"^/v2/%s/%s([.][^.]+)?$" % (RESOURCE_RE, UUID_RE), re.UNICODE)
-        self.create_resource_regex = re.compile(
-            r"^/%s/%s([.][^.]+)?$" % (API_VERSION, RESOURCE_RE))
-        self.start_alarm_regex = re.compile(
-            r"^/v2/(alarms)/%s/switch$" % UUID_RE)
+        self.resource_regex = re.compile(r"^/v2/%s/%s([.][^.]+)?$" % (RESOURCE_RE, UUID_RE), re.UNICODE)
+        self.create_resource_regex = re.compile(r"^/%s/%s([.][^.]+)?$" % (API_VERSION, RESOURCE_RE))
+        self.start_alarm_regex = re.compile(r"^/v2/(alarms)/%s/switch$" % UUID_RE)
         self.position = 1
         self.black_list += [
             self.start_alarm_action,
@@ -27,8 +24,7 @@ class CeilometerBillingProtocol(base.BillingProtocol):
         ]
 
     def start_alarm_action(self, method, path_info, body):
-        if (method == "PUT" and body == 'on' and
-            self.start_alarm_regex.search(path_info)):
+        if method == "PUT" and body == 'on' and self.start_alarm_regex.search(path_info):
             return True
         return False
 

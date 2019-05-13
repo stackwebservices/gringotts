@@ -46,8 +46,7 @@ class ProductsController(rest.RestController):
                                    sort_dir=sort_dir)
         products = []
         for p in result:
-            unit_price = \
-                gringutils.transform_unit_price_string(p.unit_price)
+            unit_price = gringutils.transform_unit_price_string(p.unit_price)
             sp = models.SimpleProduct.transform(name=p.name,
                                                 service=p.service,
                                                 unit_price_price=unit_price,

@@ -144,6 +144,7 @@ def setup_app(config=None):
 
     return app
 
+
 def setup_noauth_app(config=None):
 
     app_hooks = [hooks.ConfigHook(),
@@ -185,6 +186,7 @@ def load_app():
 
 def app_factory(global_config, **local_conf):
     return setup_app()
+
 
 def noauth_app_factory(global_config, **local_conf):
     return setup_noauth_app()
